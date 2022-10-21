@@ -1,0 +1,42 @@
+ALTER TABLE AddressBook ADD Type varchar(30);
+UPDATE AddressBook SET Type='Family' WHERE first_name='Ravi';
+SELECT COUNT(*) FROM AddressBook GROUP BY Type;
+CREATE TABLE type AS (SELECT First_Name, Type FROM AddressBook);
+	INSERT INTO type VALUES ('Ram','family');
+	INSERT INTO type VALUES ('Ram', 'Friend');
+    CREATE TABLE address AS (SELECT First_Name, Address, City, State, Zip FROM AddressBook);
+ALTER TABLE AddressBook DROP Address, DROP City, DROP State, DROP Zip;
+SELECT ab.First_Name, ab.Last_Name FROM AddressBook ab
+		LEFT JOIN address a
+		ON ab.First_Name = a.First_Name		
+		WHERE City='Brooklyn' OR State='Kerala';
+    SELECT ab.First_Name, ab.Last_Name FROM AddressBook ab
+		LEFT JOIN address a
+		ON ab.First_Name = a.First_Name		
+		WHERE City='Brooklyn' OR State='Kerala';
+        SELECT COUNT(a.State) FROM AddressBook ab
+		LEFT JOIN address a
+		ON ab.First_Name = a.First_Name
+		GROUP BY a.State;
+        SELECT COUNT(a.State) FROM AddressBook ab
+		LEFT JOIN address a
+		ON ab.First_Name = a.First_Name
+		GROUP BY a.State;
+	
+	SELECT ab.First_Name, ab.Last_Name, a.City FROM AddressBook ab 
+		LEFT JOIN address a
+		ON ab.First_Name = a.First_Name
+		ORDER BY ab.First_Name;
+
+	SELECT COUNT(*) FROM AddressBook ab
+		LEFT JOIN Type t
+		ON ab.First_Name = t.First_Name	
+		GROUP BY t.Type;
+
+	SELECT ab.First_Name, ab.Last_Name, ab.Phone_Number,
+		 a.Address, a.City, a.State, a.Zip, t.Type
+			FROM AddressBook ab
+			LEFT JOIN address a
+			ON ab.First_Name = a.First_Name
+			LEFT JOIN type t
+			ON ab.First_Name = t.First_Name;
